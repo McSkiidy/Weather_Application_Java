@@ -7,11 +7,7 @@
 
 - 🔭 I’m currently working on [Weather Application Using JAVA](https://github.com/ShubhamRS14/WeatherApplication_JAVA)
 
-- 🌱 I’m currently learning **Java,AWS Cloud Foundations and Security Practices**
-
-- 💬 Ask me about **HTML,CSS,pHp,AWS Cloud,Linux**
-
-- 📫 How to reach me **ss2899411@gmail.com**
+  
 
 ### Blogs posts
 <!-- BLOG-POST-LIST:START -->
