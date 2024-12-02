@@ -16,6 +16,8 @@ import java.awt.*;
 
 
 
+
+
 public class WeatherApplication extends javax.swing.JFrame{
     public WeatherApplication(){
         initComponents();
