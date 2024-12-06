@@ -2,9 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
+package weatherapplication;
 
-
-package myprojects;
+import java.util.logging.Logger;
+import java.awt.*;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import java.io.BufferedReader;
@@ -14,24 +15,29 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.awt.*;
 
+/**
+ *
+ * @author thor
+ */
+public class WeatherApp extends javax.swing.JFrame {
 
-
-
-
-public class WeatherApplication extends javax.swing.JFrame{
-    public WeatherApplication(){
+    /**
+     * Creates new form WeatherApp
+     */
+    public WeatherApp() {
         initComponents();
+       
+        jTextField1.setToolTipText("Enter the name of a city to get weather information.");
+        jButton1.setToolTipText("Click to fetch weather information.");
+        jButton2.setToolTipText("Clear the input and output.");
+        jButton3.setToolTipText("Exit the application.");
+
         
-        setResizable(false); //ensures that the window is not resizable
-////        setSize(800,625);
-//        setLayout(new BorderLayout());
-//          setVisible(true);
-          setTitle("Weather Application");
+
+        setTitle("Weather Application");
+        setResizable(false);
         
-        
-          
-          // Set weather-related icon in the title bar
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/myprojects/cloudy.jpg")));
+         // Set weather-related icon in the title bar
           jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
             @Override
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -42,10 +48,10 @@ public class WeatherApplication extends javax.swing.JFrame{
                 }
             }
         });
-          
-          
-        
     }
+//    logger.info("Fetching weather for location: " + location);
+//    logger.severe("Error retrieving weather data: " + ex.getMessage());
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -55,204 +61,168 @@ public class WeatherApplication extends javax.swing.JFrame{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(0, 102, 102));
-        setFont(new java.awt.Font("Century", 0, 12)); // NOI18N
-        setLocation(new java.awt.Point(200, 150));
 
-        jPanel1.setBackground(new java.awt.Color(243, 170, 27));
+        jLabel1.setBackground(new java.awt.Color(255, 102, 102));
+        jLabel1.setFont(new java.awt.Font("DejaVu Sans Mono", 1, 24)); // NOI18N
+        jLabel1.setForeground(javax.swing.UIManager.getDefaults().getColor("Actions.Red"));
+        jLabel1.setText("Weather Information Application");
+        jLabel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 0), 3, true));
 
-        jLabel1.setBackground(new java.awt.Color(102, 153, 0));
-        jLabel1.setFont(new java.awt.Font("Algerian", 0, 18)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Weather Forecast Application");
-        jLabel1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, java.awt.Color.BLACK));
-        jLabel1.setDebugGraphicsOptions(javax.swing.DebugGraphics.FLASH_OPTION);
+        jLabel2.setBackground(new java.awt.Color(0, 255, 255));
+        jLabel2.setFont(new java.awt.Font("Yrsa SemiBold", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel2.setText("Enter the Location");
+        jLabel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(153, 153, 0), new java.awt.Color(153, 255, 0), new java.awt.Color(0, 153, 153), new java.awt.Color(0, 204, 204)));
+        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jLabel2.setDebugGraphicsOptions(javax.swing.DebugGraphics.LOG_OPTION);
+        jLabel2.setOpaque(true);
 
-        jButton1.setBackground(new java.awt.Color(255, 0, 0));
-        jButton1.setFont(new java.awt.Font("Rockwell", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(51, 204, 255));
-        jButton1.setText("Get Weather");
-        jButton1.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, new java.awt.Color(0, 153, 153), java.awt.Color.yellow, java.awt.Color.orange), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(153, 153, 0), new java.awt.Color(255, 255, 0), new java.awt.Color(0, 153, 153), new java.awt.Color(0, 204, 204))));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jTextField1.setBackground(new java.awt.Color(102, 255, 0));
-        jTextField1.setFont(new java.awt.Font("Lucida Calligraphy", 1, 14)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(255, 51, 51));
-        jTextField1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.gray, java.awt.Color.yellow, java.awt.Color.orange));
+        jTextField1.setBackground(new java.awt.Color(0, 255, 51));
+        jTextField1.setFont(new java.awt.Font("Ubuntu Sans Mono", 1, 14)); // NOI18N
+        jTextField1.setName(""); // NOI18N
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
             }
         });
 
-        jLabel2.setBackground(new java.awt.Color(0, 204, 0));
-        jLabel2.setFont(new java.awt.Font("Segoe Print", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 51, 204));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setLabelFor(jLabel1);
-        jLabel2.setText("Enter the location:");
-        jLabel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 255), 2, true));
+        jButton1.setBackground(new java.awt.Color(0, 204, 0));
+        jButton1.setFont(new java.awt.Font("C059", 1, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(51, 51, 255));
+        jButton1.setText("Get Weather");
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
-        jLabel3.setBackground(new java.awt.Color(102, 204, 0));
-        jLabel3.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 255));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/myprojects/snowy.jpg"))); // NOI18N
-        jLabel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Output", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Algerian", 0, 14), new java.awt.Color(0, 0, 204))); // NOI18N
-        jLabel3.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/myprojects/cloudy.jpg"))); // NOI18N
-        jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
-        jButton2.setBackground(new java.awt.Color(51, 153, 0));
-        jButton2.setFont(new java.awt.Font("Poor Richard", 1, 14)); // NOI18N
-        jButton2.setText("Exit");
-        jButton2.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(0, 204, 204), new java.awt.Color(255, 51, 51)));
+        jButton2.setBackground(new java.awt.Color(0, 153, 153));
+        jButton2.setFont(new java.awt.Font("C059", 1, 14)); // NOI18N
+        jButton2.setText("Clear");
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton2.setDebugGraphicsOptions(javax.swing.DebugGraphics.FLASH_OPTION);
+        jButton2.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
-        jButton3.setBackground(java.awt.Color.gray);
-        jButton3.setFont(new java.awt.Font("Poor Richard", 0, 14)); // NOI18N
-        jButton3.setText("Clear");
-        jButton3.setBorder(null);
+        jTextArea1.setEditable(false);
+        jTextArea1.setBackground(new java.awt.Color(0, 204, 204));
+        jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Chandas", 1, 14)); // NOI18N
+        jTextArea1.setLineWrap(true);
+        jTextArea1.setRows(5);
+        jTextArea1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Output", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Chilanka", 1, 12), new java.awt.Color(255, 51, 51))); // NOI18N
+        jScrollPane1.setViewportView(jTextArea1);
+
+        jButton3.setBackground(new java.awt.Color(0, 153, 153));
+        jButton3.setFont(new java.awt.Font("C059", 1, 14)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 51, 51));
+        jButton3.setText("Exit");
         jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton3.setNextFocusableComponent(jButton3);
-        jButton3.setOpaque(true);
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(316, 316, 316))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(93, 93, 93)
-                        .addComponent(jLabel2)
-                        .addGap(27, 27, 27)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(283, 283, 283)
-                        .addComponent(jButton1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(110, 110, 110)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(130, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(0, 120, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(244, 244, 244))
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(528, 528, 528)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(120, 120, 120)))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(69, 69, 69)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 223, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(95, 95, 95))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(211, 211, 211)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGap(100, 100, 100)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(133, 133, 133)))
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(128, 128, 128)
+                .addComponent(jLabel2)
+                .addGap(53, 53, 53)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(79, 79, 79)
+                        .addComponent(jButton2))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(180, 180, 180)))
+                .addContainerGap(143, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(253, 253, 253))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton3)
+                        .addGap(357, 357, 357))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(57, 57, 57)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2))
+                .addGap(66, 66, 66)
+                .addComponent(jButton1)
+                .addGap(49, 49, 49)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton3)
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(715, 642));
+        pack();
         setLocationRelativeTo(null);
     }// </editor-fold>                        
 
-
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {                                            
         // TODO add your handling code here:
-//        jTextField1.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.DARK_GRAY));
-        jTextField1.setMargin(new Insets(5, 10, 5, 10));
-        
-
+        jTextField1.setMargin(new Insets(5,10,5,10));
     }                                           
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-        
-//        jButton1 getWeatherButton = new jButton("Get Weather", new ImageIcon("path/to/weather-icon.png"));
-
         String location = jTextField1.getText(); // Get location from the text field
     if (!location.isEmpty()) {
         getWeather(location); // Call the method to get the weather
     } else {
-        jLabel3.setText("Please enter a location."); // Error message
+        jTextArea1.setText("Please enter a location."); // Error message
     }
-    }                                        
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
-        System.exit(0);
     }                                        
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
+        System.exit(0);
+    }                                        
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
         jTextField1.setText("");
-        jLabel3.setText("");
-        
+        jTextArea1.setText("");
     }                                        
 
     
-        // Method to get the weather information
+     // Method to get the weather information
+    
+    
+    // Method to get the weather information
 private void getWeather(String location) {
     try {
         String apiKey = "88ea5541c5bdccd8b5198e21248468aa"; // Your API key
@@ -261,12 +231,19 @@ private void getWeather(String location) {
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
 
-        // Debugging - Check the response code
         int responseCode = connection.getResponseCode();
         if (responseCode != 200) {
-            throw new IOException("Error in API call: Response code " + responseCode);
+            if (responseCode == 404) {
+                jTextArea1.setText("Location not found. Please check the city name and try again.");
+            } else if (responseCode == 401) {
+                jTextArea1.setText("Invalid API key. Please check your API key.");
+            } else {
+                jTextArea1.setText("Unable to retrieve weather data. Response code: " + responseCode);
+            }
+            return;
         }
 
+        // Read the API response
         StringBuilder content;
         try (BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
             String inputLine;
@@ -277,81 +254,87 @@ private void getWeather(String location) {
         }
         connection.disconnect();
 
-        // Debugging - Print out the raw JSON response
-        System.out.println("API Response: " + content.toString());
-
         // Parse the JSON response
         JsonObject jsonObject = JsonParser.parseString(content.toString()).getAsJsonObject();
 
-        // Safely access weather data
+        // Extract weather data
         String weather = jsonObject.getAsJsonArray("weather").get(0).getAsJsonObject().get("description").getAsString();
         JsonObject main = jsonObject.getAsJsonObject("main");
         String temperature = main.get("temp").getAsString();
+        String feelsLike = main.get("feels_like").getAsString();
         String humidity = main.get("humidity").getAsString();
-
-        // Check if wind data exists and extract it
+        String visibility = jsonObject.has("visibility") ? jsonObject.get("visibility").getAsString() : "N/A";
         String windSpeed = jsonObject.has("wind") ? jsonObject.getAsJsonObject("wind").get("speed").getAsString() : "N/A";
 
-        // Check if coordinates data exists and extract latitude/longitude
+        // Extract coordinates if available
         JsonObject coordinates = jsonObject.has("coord") ? jsonObject.getAsJsonObject("coord") : null;
         String latitude = (coordinates != null && coordinates.has("lat")) ? coordinates.get("lat").getAsString() : "N/A";
         String longitude = (coordinates != null && coordinates.has("lon")) ? coordinates.get("lon").getAsString() : "N/A";
 
-        // Display the weather information in the label
-        jLabel3.setText("<html>Weather: " + weather + "<br>Temperature: " + temperature + " °C<br>Humidity: " + humidity + "%"
-            + "<br>Wind Speed: " + windSpeed + " m/s<br>Latitude: " + latitude + "<br>Longitude: " + longitude + "</html>");
+        // Format the weather information
+        String weatherInfo = "Weather: " + weather + "\n"
+                + "Temperature: " + temperature + " °C\n"
+                + "Feels Like: " + feelsLike + " °C\n"
+                + "Humidity: " + humidity + "%\n"
+                + "Visibility: " + visibility + " meters\n"
+                + "Wind Speed: " + windSpeed + " m/s\n"
+                + "Latitude: " + latitude + "\n"
+                + "Longitude: " + longitude;
+
+        // Update the output text area
+        jTextArea1.setText(weatherInfo);
 
     } catch (IOException ex) {
-        jLabel3.setText("Error retrieving weather data.");
-        // Debugging - Print out the error
-        System.out.println("IOException: " + ex.getMessage());
+        jTextArea1.setText("Error retrieving weather data. Please check your internet connection.");
     } catch (NullPointerException ex) {
-        jLabel3.setText("Error processing weather data.");
-        // Debugging - Print out the error
-        System.out.println("NullPointerException: " + ex.getMessage());
+        jTextArea1.setText("Error processing weather data. Please try again.");
     }
 }
-
 
     /**
      * @param args the command line arguments
      */
-     
-    
     public static void main(String args[]) {
-    // Set the Nimbus look and feel
-    try {
-        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-            if ("Nimbus".equals(info.getName())) {
-                javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                break;
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
             }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(WeatherApp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(WeatherApp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(WeatherApp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(WeatherApp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-    } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-        java.util.logging.Logger.getLogger(WeatherApplication.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    }  
-    
+        //</editor-fold>
 
-    // Create and display the form
-    java.awt.EventQueue.invokeLater(() -> {
-        WeatherApplication app = new WeatherApplication();
-        app.setVisible(true); // Set the instance to be visible
-        
-    });
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new WeatherApp().setVisible(true);
+            }
+        });
     }
- 
+
     // Variables declaration - do not modify                     
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration                   
-
-
 }
-
-
