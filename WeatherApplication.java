@@ -49,8 +49,6 @@ public class WeatherApp extends javax.swing.JFrame {
             }
         });
     }
-//    logger.info("Fetching weather for location: " + location);
-//    logger.severe("Error retrieving weather data: " + ex.getMessage());
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -66,9 +64,9 @@ public class WeatherApp extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
         jButton3 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jEditorPane1 = new javax.swing.JEditorPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -118,15 +116,6 @@ public class WeatherApp extends javax.swing.JFrame {
             }
         });
 
-        jTextArea1.setEditable(false);
-        jTextArea1.setBackground(new java.awt.Color(0, 204, 204));
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Chandas", 1, 14)); // NOI18N
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(5);
-        jTextArea1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Output", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Chilanka", 1, 12), new java.awt.Color(255, 51, 51))); // NOI18N
-        jScrollPane1.setViewportView(jTextArea1);
-
         jButton3.setBackground(new java.awt.Color(0, 153, 153));
         jButton3.setFont(new java.awt.Font("C059", 1, 14)); // NOI18N
         jButton3.setForeground(new java.awt.Color(255, 51, 51));
@@ -138,10 +127,27 @@ public class WeatherApp extends javax.swing.JFrame {
             }
         });
 
+        jEditorPane1.setEditable(false);
+        jEditorPane1.setBackground(new java.awt.Color(51, 153, 0));
+        jEditorPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Output", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("SansSerif", 1, 24), new java.awt.Color(0, 255, 255))); // NOI18N
+        jEditorPane1.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        jEditorPane1.setForeground(new java.awt.Color(0, 255, 255));
+        jEditorPane1.setToolTipText("Weather Information");
+        jEditorPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jScrollPane2.setViewportView(jEditorPane1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addGap(357, 357, 357))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(128, 128, 128)
                 .addComponent(jLabel2)
@@ -155,18 +161,9 @@ public class WeatherApp extends javax.swing.JFrame {
                         .addComponent(jButton1)
                         .addGap(180, 180, 180)))
                 .addContainerGap(143, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(253, 253, 253))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton3)
-                        .addGap(357, 357, 357))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(262, 262, 262)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -181,8 +178,8 @@ public class WeatherApp extends javax.swing.JFrame {
                     .addComponent(jButton2))
                 .addGap(66, 66, 66)
                 .addComponent(jButton1)
-                .addGap(49, 49, 49)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton3)
                 .addContainerGap(27, Short.MAX_VALUE))
@@ -199,12 +196,12 @@ public class WeatherApp extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-        String location = jTextField1.getText(); // Get location from the text field
-    if (!location.isEmpty()) {
-        getWeather(location); // Call the method to get the weather
-    } else {
-        jTextArea1.setText("Please enter a location."); // Error message
-    }
+        String location = jTextField1.getText();
+        if (!location.isEmpty()) {
+            getWeather(location);
+        } else {
+            jEditorPane1.setText("Please enter a location.");
+        }
     }                                        
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
@@ -215,7 +212,8 @@ public class WeatherApp extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
         jTextField1.setText("");
-        jTextArea1.setText("");
+        jEditorPane1.setText("Weather info will appear here...");
+
     }                                        
 
     
@@ -234,11 +232,11 @@ private void getWeather(String location) {
         int responseCode = connection.getResponseCode();
         if (responseCode != 200) {
             if (responseCode == 404) {
-                jTextArea1.setText("Location not found. Please check the city name and try again.");
+                jEditorPane1.setText("Location not found. Please check the city name and try again.");
             } else if (responseCode == 401) {
-                jTextArea1.setText("Invalid API key. Please check your API key.");
+                jEditorPane1.setText("Invalid API key. Please check your API key.");
             } else {
-                jTextArea1.setText("Unable to retrieve weather data. Response code: " + responseCode);
+                jEditorPane1.setText("Unable to retrieve weather data. Response code: " + responseCode);
             }
             return;
         }
@@ -282,12 +280,12 @@ private void getWeather(String location) {
                 + "Longitude: " + longitude;
 
         // Update the output text area
-        jTextArea1.setText(weatherInfo);
+        jEditorPane1.setText(weatherInfo);
 
     } catch (IOException ex) {
-        jTextArea1.setText("Error retrieving weather data. Please check your internet connection.");
+        jEditorPane1.setText("Error retrieving weather data. Please check your internet connection.");
     } catch (NullPointerException ex) {
-        jTextArea1.setText("Error processing weather data. Please try again.");
+        jEditorPane1.setText("Error processing weather data. Please try again.");
     }
 }
 
@@ -331,10 +329,10 @@ private void getWeather(String location) {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration                   
 }
