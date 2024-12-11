@@ -14,18 +14,36 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Random;
+import javax.swing.Timer;
 
 /**
  *
  * @author thor
  */
 public class WeatherApp extends javax.swing.JFrame {
+    // Add the snowfall panel with GUI components
+    private final ArrayList<Snowflake> snowflakes;
+    private final Random random;
+    private Timer timer;
 
     /**
      * Creates new form WeatherApp
      */
     public WeatherApp() {
         initComponents();
+        
+        //SnowFlakes components://
+        snowflakes = new ArrayList<>();
+        random = new Random();
+        setLayout(null); // Use null layout for custom positioning
+
+        jPanel2.setBackground(Color.BLACK);
+
+        // Start snowfall animation
+        startSnowfall();
+      
        
         jTextField1.setToolTipText("Enter the name of a city to get weather information.");
         jButton1.setToolTipText("Click to fetch weather information.");
@@ -48,6 +66,7 @@ public class WeatherApp extends javax.swing.JFrame {
                 }
             }
         });
+         
     }
 
     /**
@@ -59,16 +78,26 @@ public class WeatherApp extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
+        jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jEditorPane1 = new javax.swing.JEditorPane();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(0, 153, 153));
+        setBounds(new java.awt.Rectangle(0, 0, 0, 0));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setFont(new java.awt.Font("Noto Sans Math", 1, 24)); // NOI18N
+        setForeground(new java.awt.Color(0, 153, 153));
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                formMouseEntered(evt);
+            }
+        });
 
         jLabel1.setBackground(new java.awt.Color(255, 102, 102));
         jLabel1.setFont(new java.awt.Font("DejaVu Sans Mono", 1, 24)); // NOI18N
@@ -86,7 +115,6 @@ public class WeatherApp extends javax.swing.JFrame {
         jLabel2.setOpaque(true);
 
         jTextField1.setBackground(new java.awt.Color(0, 255, 51));
-        jTextField1.setFont(new java.awt.Font("Ubuntu Sans Mono", 1, 14)); // NOI18N
         jTextField1.setName(""); // NOI18N
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -127,63 +155,92 @@ public class WeatherApp extends javax.swing.JFrame {
             }
         });
 
-        jEditorPane1.setEditable(false);
-        jEditorPane1.setBackground(new java.awt.Color(51, 153, 0));
-        jEditorPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Output", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("SansSerif", 1, 24), new java.awt.Color(0, 255, 255))); // NOI18N
-        jEditorPane1.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        jEditorPane1.setForeground(new java.awt.Color(0, 255, 255));
-        jEditorPane1.setToolTipText("Weather Information");
-        jEditorPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jScrollPane2.setViewportView(jEditorPane1);
+        jLabel3.setBackground(new java.awt.Color(0, 153, 51));
+        jLabel3.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 0));
+        jLabel3.setAutoscrolls(true);
+        jLabel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Output", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Chilanka", 1, 18), new java.awt.Color(51, 51, 255))); // NOI18N
+        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jLabel3.setOpaque(true);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(144, 144, 144)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(238, 238, 238)
+                        .addComponent(jButton3))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(129, 129, 129)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(53, 53, 53)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(79, 79, 79)
+                                .addComponent(jButton2))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addGap(180, 180, 180)))))
+                .addContainerGap(280, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
+                .addGap(57, 57, 57)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2))
+                .addGap(66, 66, 66)
+                .addComponent(jButton1)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton3)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton3)
-                .addGap(357, 357, 357))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(128, 128, 128)
-                .addComponent(jLabel2)
-                .addGap(53, 53, 53)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(79, 79, 79)
-                        .addComponent(jButton2))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(180, 180, 180)))
-                .addContainerGap(143, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(262, 262, 262)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(57, 57, 57)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
-                .addGap(66, 66, 66)
-                .addComponent(jButton1)
-                .addGap(34, 34, 34)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton3)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
+
+        jPanel2 = new javax.swing.JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);  // Call the superclass' paintComponent method
+                Graphics2D g2d = (Graphics2D) g;
+                g2d.setColor(Color.WHITE);  // Set the snowflake color
+
+                // Draw all snowflakes
+                for (Snowflake snowflake : snowflakes) {
+                    g2d.fillOval(snowflake.x, snowflake.y, snowflake.size, snowflake.size);
+                }
+            }
+        };
 
         pack();
         setLocationRelativeTo(null);
@@ -200,7 +257,7 @@ public class WeatherApp extends javax.swing.JFrame {
         if (!location.isEmpty()) {
             getWeather(location);
         } else {
-            jEditorPane1.setText("Please enter a location.");
+            jLabel3.setText("Please enter a location.");
         }
     }                                        
 
@@ -212,82 +269,108 @@ public class WeatherApp extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
         jTextField1.setText("");
-        jEditorPane1.setText("Weather info will appear here...");
+        jLabel3.setText("Weather info will appear here...");
 
     }                                        
+
+    private void formMouseEntered(java.awt.event.MouseEvent evt) {                                  
+        // TODO add your handling code here:
+    }                                 
 
     
      // Method to get the weather information
     
     
     // Method to get the weather information
-private void getWeather(String location) {
-    try {
-        String apiKey = "88ea5541c5bdccd8b5198e21248468aa"; // Your API key
-        String urlString = "http://api.openweathermap.org/data/2.5/weather?q=" + location + "&appid=" + apiKey + "&units=metric";
-        URL url = new URL(urlString);
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        connection.setRequestMethod("GET");
+    
+    private void getWeather(String location) {
+        try {
+            String apiKey = "88ea5541c5bdccd8b5198e21248468aa";
+            String urlString = "http://api.openweathermap.org/data/2.5/weather?q=" + location + "&appid=" + apiKey + "&units=metric";
+            URL url = new URL(urlString);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
 
-        int responseCode = connection.getResponseCode();
-        if (responseCode != 200) {
-            if (responseCode == 404) {
-                jEditorPane1.setText("Location not found. Please check the city name and try again.");
-            } else if (responseCode == 401) {
-                jEditorPane1.setText("Invalid API key. Please check your API key.");
-            } else {
-                jEditorPane1.setText("Unable to retrieve weather data. Response code: " + responseCode);
+            int responseCode = connection.getResponseCode();
+            if (responseCode != 200) {
+                if (responseCode == 404) {
+                    jLabel3.setText("<html><body><h3 style='color:red;'>Location Not Found</h3><p>Check the city name and try again.</p></body></html>");
+                } else if (responseCode == 401) {
+                    jLabel3.setText("<html><body><h3 style='color:red;'>Invalid API Key</h3><p>Ensure the API key is correct.</p></body></html>");
+                } else {
+                    jLabel3.setText("<html><body><h3 style='color:red;'>Error Retrieving Data</h3><p>Try again later.</p></body></html>");
+                }
+                return;
             }
-            return;
+
+            StringBuilder content;
+            try (BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+                String inputLine;
+                content = new StringBuilder();
+                while ((inputLine = in.readLine()) != null) {
+                    content.append(inputLine);
+                }
+            }
+            connection.disconnect();
+
+            // Parse JSON
+            JsonObject jsonObject = JsonParser.parseString(content.toString()).getAsJsonObject();
+            String weather = jsonObject.getAsJsonArray("weather").get(0).getAsJsonObject().get("description").getAsString();
+            String temperature = jsonObject.getAsJsonObject("main").get("temp").getAsString();
+            String feelsLike = jsonObject.getAsJsonObject("main").get("feels_like").getAsString();
+            String humidity = jsonObject.getAsJsonObject("main").get("humidity").getAsString();
+            String visibility = jsonObject.has("visibility") ? jsonObject.get("visibility").getAsString() : "N/A";
+            String windSpeed = jsonObject.getAsJsonObject("wind").get("speed").getAsString();
+            String latitude = jsonObject.getAsJsonObject("coord").get("lat").getAsString();
+            String longitude = jsonObject.getAsJsonObject("coord").get("lon").getAsString();
+
+            // Update JLabel
+            String weatherInfo = "<html><body>"
+                    + "<h3 style='font-weight:bold;'>Weather Information</h3>"
+                    + "<p><b>Weather:</b> " + weather + "</p>"
+                    + "<p><b>Temperature:</b> " + temperature + " °C</p>"
+                    + "<p><b>Feels Like:</b> " + feelsLike + " °C</p>"
+                    + "<p><b>Humidity:</b> " + humidity + "%</p>"
+                    + "<p><b>Visibility:</b> " + visibility + " meters</p>"
+                    + "<p><b>Wind Speed:</b> " + windSpeed + " m/s</p>"
+                    + "<p><b>Latitude:</b> " + latitude + "</p>"
+                    + "<p><b>Longitude:</b> " + longitude + "</p>"
+                    + "</body></html>";
+
+            jLabel3.setText(weatherInfo);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            jLabel3.setText("<html><body><h3 style='color:red;'>Error Retrieving Data</h3><p>Check your network connection or API key.</p></body></html>");
         }
 
-        // Read the API response
-        StringBuilder content;
-        try (BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
-            String inputLine;
-            content = new StringBuilder();
-            while ((inputLine = in.readLine()) != null) {
-                content.append(inputLine);
-            }
-        }
-        connection.disconnect();
 
-        // Parse the JSON response
-        JsonObject jsonObject = JsonParser.parseString(content.toString()).getAsJsonObject();
 
-        // Extract weather data
-        String weather = jsonObject.getAsJsonArray("weather").get(0).getAsJsonObject().get("description").getAsString();
-        JsonObject main = jsonObject.getAsJsonObject("main");
-        String temperature = main.get("temp").getAsString();
-        String feelsLike = main.get("feels_like").getAsString();
-        String humidity = main.get("humidity").getAsString();
-        String visibility = jsonObject.has("visibility") ? jsonObject.get("visibility").getAsString() : "N/A";
-        String windSpeed = jsonObject.has("wind") ? jsonObject.getAsJsonObject("wind").get("speed").getAsString() : "N/A";
-
-        // Extract coordinates if available
-        JsonObject coordinates = jsonObject.has("coord") ? jsonObject.getAsJsonObject("coord") : null;
-        String latitude = (coordinates != null && coordinates.has("lat")) ? coordinates.get("lat").getAsString() : "N/A";
-        String longitude = (coordinates != null && coordinates.has("lon")) ? coordinates.get("lon").getAsString() : "N/A";
-
-        // Format the weather information
-        String weatherInfo = "Weather: " + weather + "\n"
-                + "Temperature: " + temperature + " °C\n"
-                + "Feels Like: " + feelsLike + " °C\n"
-                + "Humidity: " + humidity + "%\n"
-                + "Visibility: " + visibility + " meters\n"
-                + "Wind Speed: " + windSpeed + " m/s\n"
-                + "Latitude: " + latitude + "\n"
-                + "Longitude: " + longitude;
-
-        // Update the output text area
-        jEditorPane1.setText(weatherInfo);
-
-    } catch (IOException ex) {
-        jEditorPane1.setText("Error retrieving weather data. Please check your internet connection.");
-    } catch (NullPointerException ex) {
-        jEditorPane1.setText("Error processing weather data. Please try again.");
     }
-}
+    
+    // Start the snowfall animation
+    private void startSnowfall() {
+        // Timer action to update snowflakes position and repaint the panel
+        timer = new Timer(30, e -> {
+            if (snowflakes.size() < 100) { // Limit number of snowflakes
+                snowflakes.add(new Snowflake(random.nextInt(jPanel2.getWidth()), 0, random.nextInt(5) + 5));
+            }
+
+            // Update snowflakes position
+            for (Snowflake snowflake : snowflakes) {
+                snowflake.y += snowflake.speed;
+                if (snowflake.y > jPanel2.getHeight()) {
+                    snowflake.y = 0; // Reset snowflake to top
+                    snowflake.x = random.nextInt(jPanel2.getWidth());
+                }
+            }
+
+            // Repaint the panel to update the snowflakes on screen
+            jPanel2.repaint();  
+        });
+    }
+
+
 
     /**
      * @param args the command line arguments
@@ -325,14 +408,31 @@ private void getWeather(String location) {
         });
     }
 
+    
+    //Snowflakes being in action from here:
+    
+
     // Variables declaration - do not modify                     
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration                   
+}
+
+
+// Class representing a single snowflake
+class Snowflake {
+    int x, y, size, speed;
+
+    public Snowflake(int x, int y, int size) {
+        this.x = x;
+        this.y = y;
+        this.size = size;
+        this.speed = size / 2; // Speed based on size for variation
+    }
 }
