@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package weatherapplication;
-
 import java.util.logging.Logger;
 import java.awt.*;
 import com.google.gson.JsonObject;
